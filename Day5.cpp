@@ -139,3 +139,106 @@ public:
         return maxArea;
     }
 };      Time Complexity (TC): O(n), Space Complexity (SC): O(n)
+
+
+Q4. 20. Valid Parentheses
+
+class Solution {
+public:
+    bool isValid(string s) {
+
+        stack<char> st;
+
+        for(int i = 0; i<s.length(); i++){
+            char ch = s[i];
+
+            if(ch == '(' || ch == '{' || ch == '['){
+                st.push(ch);
+            }
+            else{
+                if(!st.empty()){
+                    char top = st.top();
+                    if(ch == ')' && top == '(' || ch == '}' && top == '{' 
+                        || ch == ']' && top == '['){
+                            st.pop();
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                else{
+                    return false;
+                }
+            }
+        }
+        if(st.empty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+};
+
+
+Q5. Print all the duplicate characters in a string
+
+using namespace std;
+void printDups(string str)
+{
+    unordered_map<char, int> count;
+    for (int i = 0; i < str.length(); i++) {
+        // increase the count of character str[i] by 1
+        count[str[i]]++;
+    }
+    // iterating through the unordered map
+    for (auto it : count) {
+        // if the count of characters is greater than 1 then
+        // duplicate found
+        if (it.second > 1)
+            cout << it.first << ", count = " << it.second
+                 << "\n";
+    }
+}
+/* Driver code*/
+int main()
+{
+    string str = "test string";
+    printDups(str);
+    return 0;
+}
+
+
+Q6. 28. Find the Index of the First Occurrence in a String
+
+class Solution {
+public:
+    int strStr(string haystack, string needle) {
+             int n = needle.size();
+        int m = haystack.size();
+        if(n==0){
+            return -1;
+        }
+        if(m<n){
+            return -1;
+        }
+     
+        for(int i = 0; i<m;i++){
+               int sol = 0;
+            bool ans = true;
+            for(int j = 0; j<n;j++){
+                if(haystack[i+j]!=needle[j]){
+                    ans = false;
+                      break;  
+                }
+                sol = i;
+            }
+                if(ans == true){
+                    return sol;
+                }
+            
+        }
+        return -1;
+    }
+};
+
